@@ -382,49 +382,20 @@ nav.main-nav input:focus { border-color: var(--pink-deep); }
   cursor: pointer;
 }
 
-/* ========== HERO CARROUSEL ========== */
-.hero-carousel {
+/* ========== HERO ========== */
+.hero {
   position: relative;
   width: 100%;
-  height: 460px;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--blush) 0%, var(--cream-dark) 55%, var(--cream) 100%);
-  border-bottom: 1px solid var(--border);
-}
-.hero-slides-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.6s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.hero-slide.active { opacity: 1; visibility: visible; z-index: 1; }
-.hero-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.hero-slide .hero-slide-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
-}
-/* Slide par défaut (sans photo) : reprend le style d'origine en dégradé rose */
-.hero-slide.hero-slide-default {
+  overflow: hidden;
   background: linear-gradient(135deg, var(--blush) 0%, var(--cream-dark) 55%, var(--cream) 100%);
-  padding: 0 40px;
+  border-bottom: 1px solid var(--border);
+  padding: 70px 40px;
   gap: 48px;
 }
-.hero-slide.hero-slide-default::after {
+.hero::after {
   content: '✦';
   position: absolute;
   right: -10px;
@@ -512,214 +483,16 @@ nav.main-nav input:focus { border-color: var(--pink-deep); }
 .hero-cat-pill:hover { background: #fff; transform: translateX(-4px); box-shadow: 0 4px 14px rgba(168,80,92,0.15); }
 .hero-cat-pill .emoji { font-size: 1.1rem; }
 
-/* Voile latéral gauche pour la lisibilité du texte, façon bannière Jumia */
-.hero-slide-side-shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.32) 32%, rgba(0,0,0,0) 62%);
-  z-index: 1;
-}
-
-/* Bloc de texte principal, aligné à gauche, façon bannière Jumia */
-.hero-slide-caption {
-  position: absolute;
-  left: 36px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  max-width: 46%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.hero-slide-phrase {
-  font-family: 'Jost', sans-serif;
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1.2;
-  color: #fff;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
-}
-
-/* Badge promo : pilule blanche arrondie, façon "JUSQU'À -60%" de Jumia */
-.hero-slide-promo-badge {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  align-self: flex-start;
-  background: #fff;
-  color: var(--pink-darker);
-  font-family: 'Jost', sans-serif;
-  padding: 14px 28px;
-  border-radius: 40px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
-}
-.hero-slide-promo-badge .promo-pretext {
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-.hero-slide-promo-badge .promo-pct {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-}
-
-/* Prix mis en avant, gros et lisible */
-.hero-slide-price-row {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.hero-slide-price {
-  display: inline-flex;
-  align-items: baseline;
-  background: linear-gradient(135deg, #fff, #FFF8F4);
-  color: var(--pink-darker);
-  font-family: 'Jost', sans-serif;
-  font-size: 2.1rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  padding: 10px 26px;
-  border-radius: 40px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
-}
-.hero-slide-price .currency {
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-left: 6px;
-  opacity: 0.75;
-}
-.hero-slide-old-price {
-  font-family: 'Jost', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: line-through;
-  opacity: 0.75;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-}
-
-/* Bouton "Découvrir", façon CTA Jumia en bas à droite */
-.hero-slide-discover-btn {
-  position: absolute;
-  right: 28px;
-  bottom: 26px;
-  z-index: 2;
-  background: var(--brown);
-  color: #fff;
-  font-family: 'Jost', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 13px 28px;
-  border-radius: 30px;
-  text-decoration: none;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-  transition: background 0.2s, transform 0.2s;
-}
-.hero-slide-discover-btn:hover { background: var(--pink-darker); transform: translateY(-2px); }
-
 @media (max-width: 768px) {
-  .hero-slide-caption { left: 18px; max-width: 62%; gap: 12px; }
-  .hero-slide-phrase { font-size: 1.15rem; }
-  .hero-slide-promo-badge { padding: 9px 18px; }
-  .hero-slide-promo-badge .promo-pretext { font-size: 0.66rem; }
-  .hero-slide-promo-badge .promo-pct { font-size: 1rem; }
-  .hero-slide-price { font-size: 1.3rem; padding: 8px 18px; }
-  .hero-slide-old-price { font-size: 0.85rem; }
-  .hero-slide-discover-btn { right: 14px; bottom: 14px; padding: 9px 18px; font-size: 0.68rem; }
-}
-
-
-
-/* Flèches de navigation */
-.hero-nav-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.85);
-  border: none;
-  color: var(--brown);
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, transform 0.2s;
-  box-shadow: 0 4px 14px rgba(90,58,46,0.15);
-}
-.hero-nav-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
-.hero-nav-prev { left: 18px; }
-.hero-nav-next { right: 18px; }
-
-/* Points indicateurs */
-.hero-dots {
-  position: absolute;
-  bottom: 18px;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-.hero-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.6);
-  border: 1px solid rgba(90,58,46,0.25);
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.2s, transform 0.2s;
-}
-.hero-dot.active { background: var(--pink-darker); border-color: var(--pink-darker); transform: scale(1.2); }
-
-/* Contrôles admin du carrousel */
-.hero-admin-controls {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  z-index: 4;
-  display: none;
-  gap: 8px;
-}
-.admin-mode .hero-admin-controls { display: flex; }
-.hero-admin-btn {
-  background: rgba(255,255,255,0.92);
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-family: 'Jost', sans-serif;
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--brown);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: background 0.2s;
-  box-shadow: 0 4px 14px rgba(90,58,46,0.15);
-}
-.hero-admin-btn:hover { background: #fff; }
-.hero-admin-btn.danger { color: #A8252F; }
-
-@media (max-width: 768px) {
-  .hero-carousel { height: 320px; }
-  .hero-slide.hero-slide-default { padding: 0 24px; flex-direction: column; align-items: flex-start; justify-content: center; }
-  .hero-nav-arrow { width: 36px; height: 36px; font-size: 1rem; }
+  .hero { padding: 40px 24px; flex-direction: column; align-items: flex-start; gap: 32px; }
+  .hero-categories { margin-left: 0; flex-direction: row; flex-wrap: wrap; }
+  .hero-text h1 { font-size: 2.1rem; }
 }
 @media (max-width: 480px) {
-  .hero-carousel { height: 280px; }
+  .hero { padding: 32px 20px; }
+  .hero-text h1 { font-size: 1.75rem; }
+  .hero-text p { font-size: 0.95rem; }
+  .hero-text .hero-cta { width: 100%; text-align: center; justify-content: center; }
 }
 
 /* ========== LAYOUT MAIN ========== */
@@ -1618,8 +1391,6 @@ footer .footer-brand p { font-size: 0.85rem; line-height: 1.7; opacity: 0.75; ma
   <span>🔐 <strong>Mode propriétaire activé</strong> — vous pouvez ajouter, modifier ou mettre en solde vos produits.</span>
   <div class="admin-actions">
     <button class="admin-sale-btn" onclick="openGlobalSaleModal()">🏷️ Gérer la bannière solde</button>
-    <button class="admin-add-btn" onclick="addHeroSlide()">+ Photo carrousel</button>
-    <button class="admin-sale-btn" onclick="removeCurrentHeroSlide()">🗑️ Supprimer photo carrousel</button>
     <button class="admin-add-btn" onclick="openProductModal()">+ Ajouter un produit</button>
   </div>
 </div>
@@ -1642,18 +1413,20 @@ footer .footer-brand p { font-size: 0.85rem; line-height: 1.7; opacity: 0.75; ma
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeFilterDrawer()"></div>
 
 <!-- ============================================================
-     HERO CARROUSEL
+     HERO (section de bienvenue statique)
      ============================================================ -->
-<section class="hero-carousel" id="heroCarousel">
-  <div class="hero-slides-track" id="heroSlidesTrack">
-    <!-- Slide par défaut (texte de bienvenue) + slides photo ajoutées par l'admin : rempli en JS -->
+<section class="hero" id="hero">
+  <div class="hero-text">
+    <span class="kicker">✦ Bienvenue chez MKD Shop ✦</span>
+    <h1>Sublimez votre <em>féminité</em><br>avec douceur</h1>
+    <p>Parfums, cosmétiques, vêtements, voiles et accessoires soigneusement sélectionnés par Maman Kagne Diagne, pour une beauté qui s'exprime avec simplicité, élégance et pudeur.</p>
+    <a href="#boutique" class="hero-cta">Découvrir la boutique →</a>
   </div>
-  <button class="hero-nav-arrow hero-nav-prev" onclick="heroPrevSlide()" title="Précédent">‹</button>
-  <button class="hero-nav-arrow hero-nav-next" onclick="heroNextSlide()" title="Suivant">›</button>
-  <div class="hero-dots" id="heroDots"></div>
-  <div class="hero-admin-controls">
-    <button class="hero-admin-btn" id="heroEditSlideBtn" onclick="editCurrentHeroSlide()" style="display:none;">✎ Modifier cette photo</button>
-    <button class="hero-admin-btn danger" id="heroRemoveSlideBtn" onclick="removeCurrentHeroSlide()" style="display:none;">🗑️ Retirer cette photo</button>
+  <div class="hero-categories">
+    <a href="#" class="hero-cat-pill" data-cat="Parfums"><span class="emoji">🌸</span> Parfums</a>
+    <a href="#" class="hero-cat-pill" data-cat="Vêtements"><span class="emoji">👗</span> Vêtements</a>
+    <a href="#" class="hero-cat-pill" data-cat="Voiles"><span class="emoji">🧕</span> Voiles</a>
+    <a href="#" class="hero-cat-pill" data-cat="Accessoires"><span class="emoji">👜</span> Accessoires</a>
   </div>
 </section>
 
@@ -1854,65 +1627,6 @@ footer .footer-brand p { font-size: 0.85rem; line-height: 1.7; opacity: 0.75; ma
       <div class="modal-footer-btns">
         <button type="button" class="btn-cancel" onclick="closeProductModal()">Annuler</button>
         <button type="submit" class="btn-save">💾 Enregistrer le produit</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ============================================================
-     MODAL — AJOUTER/MODIFIER UNE PHOTO DU CARROUSEL (admin)
-     ============================================================ -->
-<div class="modal-overlay" id="heroSlideModalOverlay">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeHeroSlideModal()">✕</button>
-    <h2 id="heroSlideModalTitle">Ajouter une photo au carrousel</h2>
-    <form id="heroSlideForm" onsubmit="saveHeroSlideForm(event)">
-      <input type="hidden" id="heroSlideEditIndex" value="-1">
-
-      <div class="form-group">
-        <label>Photo du carrousel</label>
-        <div class="img-upload-zone" onclick="document.getElementById('heroSlideImageInput').click()">
-          <span style="font-size:1.8rem;">📷</span>
-          <div class="hint">Cliquez pour choisir une photo</div>
-        </div>
-        <input type="file" id="heroSlideImageInput" accept="image/*" style="display:none" onchange="previewHeroSlideImage(event)">
-        <div id="heroSlideImgPreview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;"></div>
-      </div>
-
-      <div class="form-group">
-        <label>Phrase affichée sur la photo (facultatif)</label>
-        <input type="text" id="heroSlideText" placeholder="Ex : Nouvelle collection voiles disponible">
-      </div>
-
-      <div class="form-group">
-        <label>Prix à afficher (FCFA, facultatif)</label>
-        <input type="number" id="heroSlidePrice" min="0" placeholder="Ex : 15000" oninput="updateHeroSlidePricePreview()">
-      </div>
-
-      <div class="sale-toggle-row">
-        <span>🏷️ Mettre cette photo en promo</span>
-        <label class="switch">
-          <input type="checkbox" id="heroSlidePromo" onchange="toggleHeroSlideSaleFields()">
-          <span class="slider"></span>
-        </label>
-      </div>
-
-      <div id="heroSlideSaleFields" style="display:none">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Réduction (%)</label>
-            <input type="number" id="heroSlideDiscount" min="1" max="90" placeholder="Ex : 20" oninput="updateHeroSlidePricePreview()">
-          </div>
-          <div class="form-group">
-            <label>Prix soldé affiché (calculé automatiquement)</label>
-            <input type="text" id="heroSlidePricePreview" disabled placeholder="—">
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-footer-btns">
-        <button type="button" class="btn-cancel" onclick="closeHeroSlideModal()">Annuler</button>
-        <button type="submit" class="btn-save">💾 Enregistrer la photo</button>
       </div>
     </form>
   </div>
@@ -2127,18 +1841,13 @@ function setupRealtimeSync() {
     })
     .subscribe();
 
-  // Écoute aussi les changements des réglages (soldes globales + carrousel hero)
+  // Écoute aussi les changements des réglages (soldes globales)
   supabaseClient
     .channel('realtime-settings')
     .on('postgres_changes', { event: '*', schema: 'public', table: SETTINGS_TABLE }, (payload) => {
       const key = (payload.new && payload.new.key) || (payload.old && payload.old.key);
       if (key === SALE_SETTING_KEY) {
         loadGlobalSale();
-      } else if (key === HERO_SLIDES_KEY) {
-        HERO_SLIDES = (payload.new && Array.isArray(payload.new.value)) ? payload.new.value : [];
-        heroCurrentIndex = 0;
-        renderHeroCarousel();
-        resetHeroAutoplay();
       }
     })
     .subscribe();
@@ -2648,295 +2357,6 @@ async function deleteProduct(id) {
   }
 }
 
-/* ============================================================
-   HERO CARROUSEL — slides photo gérées par l'admin (synchro Supabase)
-   ============================================================ */
-const HERO_SLIDES_KEY = 'hero_slides';
-let HERO_SLIDES = []; // [{ image, promo, price, text }]
-let heroCurrentIndex = 0;
-let heroAutoTimer = null;
-let heroSlideTempImage = null; // data URL en attente de validation dans la modal
-
-function heroTotalSlides() {
-  return 1 + HERO_SLIDES.length; // slide 0 = slide de bienvenue par défaut, fixe
-}
-
-async function fetchHeroSlides() {
-  try {
-    const { data, error } = await supabaseClient
-      .from(SETTINGS_TABLE)
-      .select('value')
-      .eq('key', HERO_SLIDES_KEY)
-      .maybeSingle();
-    if (error) throw error;
-    return (data && Array.isArray(data.value)) ? data.value : [];
-  } catch (e) {
-    console.error('Erreur de chargement du carrousel Supabase :', e);
-    return [];
-  }
-}
-
-async function saveHeroSlides() {
-  try {
-    const { error } = await supabaseClient
-      .from(SETTINGS_TABLE)
-      .upsert({ key: HERO_SLIDES_KEY, value: HERO_SLIDES });
-    if (error) throw error;
-  } catch (e) {
-    console.error('Erreur de sauvegarde du carrousel Supabase :', e);
-    alert('La photo a été appliquée ici, mais la sauvegarde en ligne a échoué. Vérifiez votre connexion internet.');
-  }
-}
-
-async function loadHeroCarousel() {
-  HERO_SLIDES = await fetchHeroSlides();
-  heroCurrentIndex = 0;
-  renderHeroCarousel();
-}
-
-function renderHeroCarousel() {
-  const track = document.getElementById('heroSlidesTrack');
-  const dotsWrap = document.getElementById('heroDots');
-  if (!track || !dotsWrap) return;
-
-  // Slide 0 : message de bienvenue d'origine (toujours présent, jamais supprimable)
-  let html = `
-    <div class="hero-slide hero-slide-default ${heroCurrentIndex === 0 ? 'active' : ''}" data-index="0">
-      <div class="hero-text">
-        <span class="kicker">✦ Bienvenue chez MKD Shop ✦</span>
-        <h1>Sublimez votre <em>féminité</em><br>avec douceur</h1>
-        <p>Parfums, cosmétiques, vêtements, voiles et accessoires soigneusement sélectionnés par Maman Kagne Diagne, pour une beauté qui s'exprime avec simplicité, élégance et pudeur.</p>
-        <a href="#boutique" class="hero-cta">Découvrir la boutique →</a>
-      </div>
-      <div class="hero-categories">
-        <a href="#" class="hero-cat-pill" data-cat="Parfums"><span class="emoji">🌸</span> Parfums</a>
-        <a href="#" class="hero-cat-pill" data-cat="Vêtements"><span class="emoji">👗</span> Vêtements</a>
-        <a href="#" class="hero-cat-pill" data-cat="Voiles"><span class="emoji">🧕</span> Voiles</a>
-        <a href="#" class="hero-cat-pill" data-cat="Accessoires"><span class="emoji">👜</span> Accessoires</a>
-      </div>
-    </div>
-  `;
-
-  // Slides photo ajoutées par l'admin : overlay dégradé bas + badge promo + phrase + prix (façon Shopify/Amazon)
-  HERO_SLIDES.forEach((slide, i) => {
-    const realIndex = i + 1;
-    const hasDiscount = slide.promo && slide.discount > 0;
-    const promoBadge = (slide.promo && hasDiscount) ? `
-      <div class="hero-slide-promo-badge">
-        <span class="promo-pretext">Jusqu'à</span>
-        <span class="promo-pct">-${slide.discount}%</span>
-      </div>
-    ` : (slide.promo ? `
-      <div class="hero-slide-promo-badge">
-        <span class="promo-pct">Promo</span>
-      </div>
-    ` : '');
-
-    let priceHtml = '';
-    if (slide.price) {
-      const finalPrice = hasDiscount ? Math.round(slide.price - (slide.price * slide.discount / 100)) : slide.price;
-      const oldPriceHtml = hasDiscount
-        ? `<span class="hero-slide-old-price">${Number(slide.price).toLocaleString('fr-FR')} FCFA</span>`
-        : '';
-      priceHtml = `
-        <div class="hero-slide-price-row">
-          <span class="hero-slide-price">${Number(finalPrice).toLocaleString('fr-FR')}<span class="currency">FCFA</span></span>
-          ${oldPriceHtml}
-        </div>
-      `;
-    }
-
-    const hasCaption = slide.text || priceHtml || promoBadge;
-    const captionHtml = hasCaption ? `
-      <div class="hero-slide-caption">
-        ${slide.text ? `<div class="hero-slide-phrase">${escapeHtml(slide.text)}</div>` : ''}
-        ${promoBadge}
-        ${priceHtml}
-      </div>
-    ` : '';
-    html += `
-      <div class="hero-slide ${heroCurrentIndex === realIndex ? 'active' : ''}" data-index="${realIndex}">
-        <img src="${slide.image}" alt="Photo promotionnelle MKD Shop">
-        <div class="hero-slide-overlay"></div>
-        <div class="hero-slide-side-shade"></div>
-        ${captionHtml}
-        <a href="#boutique" class="hero-slide-discover-btn">Découvrir</a>
-      </div>
-    `;
-  });
-
-  track.innerHTML = html;
-
-  // Points indicateurs
-  let dotsHtml = '';
-  for (let i = 0; i < heroTotalSlides(); i++) {
-    dotsHtml += `<button class="hero-dot ${i === heroCurrentIndex ? 'active' : ''}" onclick="heroGoToSlide(${i})" title="Aller à la photo ${i + 1}"></button>`;
-  }
-  dotsWrap.innerHTML = dotsHtml;
-
-  // Boutons admin contextuels (visibles seulement sur une slide photo, pas la slide de bienvenue)
-  const editBtn = document.getElementById('heroEditSlideBtn');
-  const removeBtn = document.getElementById('heroRemoveSlideBtn');
-  const onPhotoSlide = heroCurrentIndex > 0;
-  if (editBtn) editBtn.style.display = onPhotoSlide ? 'flex' : 'none';
-  if (removeBtn) removeBtn.style.display = onPhotoSlide ? 'flex' : 'none';
-
-  // Réactive les liens catégories de la slide de bienvenue (regénérée en innerHTML)
-  bindHeroCategoryLinks();
-}
-
-function bindHeroCategoryLinks() {
-  document.querySelectorAll('.hero-cat-pill').forEach(el => {
-    el.addEventListener('click', function(e) {
-      if (this.dataset.cat) {
-        e.preventDefault();
-        setCategory(this.dataset.cat);
-      }
-    });
-  });
-}
-
-function heroGoToSlide(i) {
-  const total = heroTotalSlides();
-  heroCurrentIndex = ((i % total) + total) % total;
-  renderHeroCarousel();
-  resetHeroAutoplay();
-}
-function heroNextSlide() { heroGoToSlide(heroCurrentIndex + 1); }
-function heroPrevSlide() { heroGoToSlide(heroCurrentIndex - 1); }
-
-function resetHeroAutoplay() {
-  if (heroAutoTimer) clearInterval(heroAutoTimer);
-  // Défilement automatique uniquement s'il y a plus d'une slide, toutes les 6 secondes
-  if (heroTotalSlides() > 1) {
-    heroAutoTimer = setInterval(() => {
-      heroCurrentIndex = (heroCurrentIndex + 1) % heroTotalSlides();
-      renderHeroCarousel();
-    }, 6000);
-  }
-}
-
-/* ---------- Modal admin : ajouter / modifier une photo du carrousel ---------- */
-function openHeroSlideModal(editIndex) {
-  // editIndex = -1 pour un ajout, ou l'index (0-based) dans HERO_SLIDES pour une modification
-  document.getElementById('heroSlideEditIndex').value = editIndex;
-  document.getElementById('heroSlideForm').reset();
-  heroSlideTempImage = null;
-  document.getElementById('heroSlideImgPreview').innerHTML = '';
-
-  if (editIndex >= 0) {
-    const slide = HERO_SLIDES[editIndex];
-    document.getElementById('heroSlideModalTitle').textContent = 'Modifier la photo du carrousel';
-    document.getElementById('heroSlideText').value = slide.text || '';
-    document.getElementById('heroSlidePrice').value = slide.price || '';
-    document.getElementById('heroSlidePromo').checked = !!slide.promo;
-    document.getElementById('heroSlideDiscount').value = slide.discount || '';
-    heroSlideTempImage = slide.image;
-    renderHeroSlideImgPreview();
-  } else {
-    document.getElementById('heroSlideModalTitle').textContent = 'Ajouter une photo au carrousel';
-    // Par défaut, la nouvelle photo reprend le statut promo de la dernière photo ajoutée
-    const previousPromo = HERO_SLIDES.length ? HERO_SLIDES[HERO_SLIDES.length - 1].promo : false;
-    document.getElementById('heroSlidePromo').checked = previousPromo;
-  }
-  toggleHeroSlideSaleFields();
-  document.getElementById('heroSlideModalOverlay').classList.add('open');
-}
-function closeHeroSlideModal() {
-  document.getElementById('heroSlideModalOverlay').classList.remove('open');
-}
-
-function toggleHeroSlideSaleFields() {
-  const on = document.getElementById('heroSlidePromo').checked;
-  document.getElementById('heroSlideSaleFields').style.display = on ? 'block' : 'none';
-  updateHeroSlidePricePreview();
-}
-
-function updateHeroSlidePricePreview() {
-  const price = parseFloat(document.getElementById('heroSlidePrice').value) || 0;
-  const discount = parseFloat(document.getElementById('heroSlideDiscount').value) || 0;
-  const finalPrice = price - (price * discount / 100);
-  document.getElementById('heroSlidePricePreview').value = (price && discount)
-    ? Math.round(finalPrice).toLocaleString('fr-FR') + ' FCFA'
-    : '—';
-}
-
-function addHeroSlide() { openHeroSlideModal(-1); }
-function editCurrentHeroSlide() {
-  if (heroCurrentIndex === 0) return;
-  openHeroSlideModal(heroCurrentIndex - 1);
-}
-
-function previewHeroSlideImage(e) {
-  const file = e.target.files && e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(ev) {
-    heroSlideTempImage = ev.target.result;
-    renderHeroSlideImgPreview();
-  };
-  reader.readAsDataURL(file);
-  e.target.value = '';
-}
-function renderHeroSlideImgPreview() {
-  const wrap = document.getElementById('heroSlideImgPreview');
-  wrap.innerHTML = heroSlideTempImage
-    ? `<div class="gallery-thumb-wrap main"><img src="${heroSlideTempImage}"><button type="button" class="remove-thumb" onclick="removeHeroSlideTempImage()">✕</button></div>`
-    : '';
-}
-function removeHeroSlideTempImage() {
-  heroSlideTempImage = null;
-  renderHeroSlideImgPreview();
-}
-
-async function saveHeroSlideForm(e) {
-  e.preventDefault();
-  if (!heroSlideTempImage) {
-    alert('Veuillez choisir une photo pour le carrousel.');
-    return;
-  }
-  const editIndex = parseInt(document.getElementById('heroSlideEditIndex').value, 10);
-  const promo = document.getElementById('heroSlidePromo').checked;
-  const slideData = {
-    image: heroSlideTempImage,
-    text: document.getElementById('heroSlideText').value.trim(),
-    price: parseFloat(document.getElementById('heroSlidePrice').value) || 0,
-    promo,
-    discount: promo ? (parseFloat(document.getElementById('heroSlideDiscount').value) || 0) : 0
-  };
-
-  if (editIndex >= 0) {
-    HERO_SLIDES[editIndex] = slideData;
-    heroCurrentIndex = editIndex + 1;
-  } else {
-    HERO_SLIDES.push(slideData);
-    heroCurrentIndex = HERO_SLIDES.length;
-  }
-
-  closeHeroSlideModal();
-  renderHeroCarousel();
-  resetHeroAutoplay();
-  document.getElementById('heroCarousel').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  await saveHeroSlides();
-}
-
-async function removeCurrentHeroSlide() {
-  if (heroCurrentIndex === 0) {
-    if (HERO_SLIDES.length === 0) {
-      alert('Il n\'y a aucune photo à supprimer dans le carrousel.');
-    } else {
-      alert('Naviguez d\'abord (flèches ou points) jusqu\'à la photo que vous voulez supprimer, puis cliquez à nouveau sur ce bouton.');
-    }
-    return;
-  }
-  if (!confirm('Retirer cette photo du carrousel ?')) return;
-  HERO_SLIDES.splice(heroCurrentIndex - 1, 1);
-  heroCurrentIndex = Math.max(0, heroCurrentIndex - 1);
-  renderHeroCarousel();
-  resetHeroAutoplay();
-  await saveHeroSlides();
-}
-
 /* ---------- Bannière soldes globale ---------- */
 async function fetchGlobalSale() {
   try {
@@ -3319,7 +2739,7 @@ document.getElementById('priceRange').addEventListener('input', function() {
   applyFilters();
 });
 
-document.querySelectorAll('nav.main-nav a, footer a[data-cat]').forEach(el => {
+document.querySelectorAll('nav.main-nav a, footer a[data-cat], .hero-cat-pill').forEach(el => {
   el.addEventListener('click', function(e) {
     if (this.dataset.cat) {
       e.preventDefault();
@@ -3355,12 +2775,10 @@ function closeFilterDrawer() {
 async function initApp() {
   await loadData();
   await loadGlobalSale();
-  await loadHeroCarousel();
   updateCartBadge();
   applyFilters();
   checkSharedProductLink();
   setupRealtimeSync(); // active la synchronisation en temps réel entre tous les appareils
-  resetHeroAutoplay();
 }
 initApp();
 
