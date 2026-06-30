@@ -5,7 +5,9 @@
 /* ---------- Connexion Supabase ---------- */
 const SUPABASE_URL = 'https://zlritpvatedsgwolamof.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_9scVQ-1LtMU0MNSTgLsKXw_BrI5ZtlH';
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: { persistSession: false } // le jeton admin n'est jamais écrit en localStorage, il vit uniquement en mémoire le temps de la session
+});
 
 const PRODUCTS_TABLE = 'products';
 const CARTS_TABLE = 'carts';
@@ -417,10 +419,8 @@ function setView(mode) {
 function handleLogoClick(e) {
   e.preventDefault();
   if (adminMode) {
-    // Déjà connecté : un nouveau clic sur le logo désactive le mode propriétaire
-    adminMode = false;
-    updateAdminUI();
-    applyFilters();
+    // Déjà connecté : un nouveau clic sur le logo déconnecte réellement la session admin
+    adminLogout();
   } else {
     openAdminLoginModal();
   }
@@ -436,18 +436,29 @@ function closeAdminLoginModal() {
   document.getElementById('adminLoginModalOverlay').classList.remove('open');
 }
 
-function submitAdminLogin(e) {
+async function submitAdminLogin(e) {
   e.preventDefault();
-  const name = document.getElementById('adminLoginName').value.trim();
-  const code = document.getElementById('adminLoginCode').value;
-  if (name === 'MKD' && code === 'Azerty2007') {
-    adminMode = true;
-    closeAdminLoginModal();
-    updateAdminUI();
-    applyFilters();
-  } else {
-    document.getElementById('adminLoginError').style.display = 'block';
+  const email = document.getElementById('adminLoginName').value.trim();
+  const password = document.getElementById('adminLoginCode').value;
+  const errEl = document.getElementById('adminLoginError');
+  errEl.style.display = 'none';
+  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+  if (error || !data.session) {
+    errEl.textContent = 'Email ou mot de passe incorrect.';
+    errEl.style.display = 'block';
+    return;
   }
+  adminMode = true;
+  closeAdminLoginModal();
+  updateAdminUI();
+  applyFilters();
+}
+
+async function adminLogout() {
+  await supabaseClient.auth.signOut();
+  adminMode = false;
+  updateAdminUI();
+  applyFilters();
 }
 
 function updateAdminUI() {
@@ -1048,25 +1059,6 @@ function closeFilterDrawer() {
 }
 
 /* ============================================================
-   INIT
-   ============================================================ */
-async function initApp() {
-  showProductLoader();
-  try {
-    await loadData();
-  } finally {
-    hideProductLoader();
-  }
-  await loadGlobalSale();
-  updateCartBadge();
-  applyFilters();
-  checkSharedProductLink();
-  setupRealtimeSync(); // active la synchronisation en temps réel entre tous les appareils
-}
-initApp();
-
-
-/* ============================================================
    MKD : overlays dynamiques (chargement produits + commande WhatsApp)
    ============================================================ */
 const MKD_WHATSAPP_NUMBER = '221784490039'; // même numéro que le bouton WhatsApp existant
@@ -1174,3 +1166,20 @@ function launchCartOrder() {
   const items = CART.map(c => ({ name: c.name, qty: c.qty, price: c.price }));
   sendOrderViaWhatsApp(items);
 }
+/* ============================================================
+   INIT
+   ============================================================ */
+async function initApp() {
+  showProductLoader();
+  try {
+    await loadData();
+  } finally {
+    hideProductLoader();
+  }
+  await loadGlobalSale();
+  updateCartBadge();
+  applyFilters();
+  checkSharedProductLink();
+  setupRealtimeSync(); // active la synchronisation en temps réel entre tous les appareils
+}
+initApp();
